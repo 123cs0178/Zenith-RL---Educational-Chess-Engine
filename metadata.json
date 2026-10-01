@@ -1,0 +1,6 @@
+{
+  "name": "Zenith-RL Neural Engine",
+  "description": "Production full-stack hybrid neural chess engine featuring reinforcement learning from self-play, TD-lambda policy updates, transposition tables, opening books, real-time search telemetry, and interactive RL training visualizer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
