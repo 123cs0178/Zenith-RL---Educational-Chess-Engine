@@ -1,6 +1,5 @@
 import express from 'express';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { createServer as createViteServer } from 'vite';
 import { ChessSearchEngine } from './src/engine/search';
 import { runBenchmarkSuite } from './src/engine/benchmark';
@@ -8,12 +7,9 @@ import { GLOBAL_POLICY_CACHE, predictPolicyPriors } from './src/engine/policy';
 import { EngineConfig } from './src/types';
 import { Chess } from 'chess.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = Number.parseInt(process.env.PORT || '8080', 10);
 
   app.use(express.json());
 
@@ -98,7 +94,7 @@ async function startServer() {
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(__dirname, 'dist');
+    const distPath = path.resolve(process.cwd(), 'dist');
     app.use(express.static(distPath));
     app.get('*', (req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
